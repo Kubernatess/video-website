@@ -1,0 +1,34 @@
+@CHARSET "UTF-8";
+form{
+	margin-top:100px;	
+}
+fieldset {
+	background-color: #F90;
+	width: 300px;
+	margin: 0 auto;
+	border-radius: 10px;
+	border: none;
+}
+input {
+	width: 95%;
+	height: 20px;
+}
+legend {
+	font-size: 30px;
+	color: #00F;
+}
+input[type="button"]{
+	color: #FFF;
+	background-color: #F00;
+	border: none;
+	width: 100px;
+	border-radius: 3px;
+	height:30px;
+}
+body {
+	background: -webkit-linear-gradient(white,blue); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(white,blue); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(white,blue); /* Firefox 3.6 - 15 */
+    background: linear-gradient(white,blue); /* 标准的语法（必须放在最后） */	
+	height:650px;
+}
