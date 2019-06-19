@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-CN">
 <head>
@@ -20,7 +21,8 @@ window.onload=function(){
 	
 }
 </script>
-<link href="../css/navigation.css" rel="stylesheet" type="text/css">
+<c:set var="path" value="${pageContext.request.contextPath}" scope="page"/>
+<link href="${path}/css/navigation.css" rel="stylesheet" type="text/css">
 <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
@@ -32,61 +34,57 @@ window.onload=function(){
 <body>
 <!-- 导航栏部分 -->
 <nav class="navbar navbar-default navbar-inverse">
-  <div class="container-fluid">
+	<div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index.html"><font color="#9900CC" size="+3">Bootstrap</font></a>
-    </div>
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        		<span class="sr-only">Toggle navigation</span>
+        		<span class="icon-bar"></span>
+        		<span class="icon-bar"></span>
+        		<span class="icon-bar"></span>
+      		</button>
+      		<a class="navbar-brand" href="index.html"><font color="#9900CC" size="+3">Bootstrap</font></a>
+    	</div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">首页<span class="sr-only">(current)</span></a></li>
-        <li><a href="#">游戏</a></li>
-        <li><a href="#">直播</a></li>
-        <li><a href="#">音乐</a></li>
-      </ul>
-      <form class="navbar-form navbar-left">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="权力的游戏-第八季">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-	  
-	  <ul class="nav navbar-nav navbar-right">
-      <%
-      	if(session.getAttribute("username")!=null){
-      %>
-			<li><a href="#">上传视频</a></li>
-	        <li class="dropdown">
-	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">YouTube<span class="caret"></span></a>
-	          <ul class="dropdown-menu">
-	            <li><a href="#">个人中心</a></li>
-	            <li><a href="#">消息</a></li>
-	            <li><a href="#">设置</a></li>
-	            <li><a href="#">VIP</a></li>
-	            <li role="separator" class="divider"></li>
-	            <li><a href="#">退出</a></li>
-	          </ul>
-	        </li>
-	      
-      <% 		
-      	}
-      	else{
-      		out.print("<li><a href='login.jsp' target='_blank'>登陆</a></li>");
-      		out.print("<li><a href='register.jsp' target='_blank'>注册</a></li>");
-      	}
-      %>
-      </ul>	      
-
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+    			<li class="active"><a href="#">首页<span class="sr-only">(current)</span></a></li>
+        		<li><a href="#">游戏</a></li>
+        		<li><a href="#">直播</a></li>
+        		<li><a href="#">音乐</a></li>
+    		</ul>
+    		<form class="navbar-form navbar-left">
+        		<div class="form-group">
+          			<input type="text" class="form-control" placeholder="权力的游戏-第八季">
+        		</div>
+        		<button type="submit" class="btn btn-default">Submit</button>
+      		</form>
+	
+			<ul class="nav navbar-nav navbar-right">  
+				<c:choose>
+					<c:when test="${empty sessionScope.username}">
+	    				<li><a href='login.jsp' target='_blank'>登陆</a></li>
+	       				<li><a href='register.jsp' target='_blank'>注册</a></li>
+	    			</c:when>
+					<c:otherwise>
+	    				<li><a href="#">上传视频</a></li>
+	        			<li class="dropdown">
+	          				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${sessionScope.username}<span class="caret"></span></a>
+	          				<ul class="dropdown-menu">
+	            				<li><a href="#">个人中心</a></li>
+	            				<li><a href="#">消息</a></li>
+	            				<li><a href="#">设置</a></li>
+	            				<li><a href="#">VIP</a></li>
+	            				<li role="separator" class="divider"></li>
+	            				<li><a href="#">退出</a></li>
+	          				</ul>
+	        			</li>
+	    			</c:otherwise>
+				</c:choose>
+			</ul>      
+    	</div><!-- /.navbar-collapse -->
+	</div><!-- /.container-fluid -->
 </nav>
 
 
@@ -133,16 +131,16 @@ window.onload=function(){
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
     <div class="item active">
-      <center><img src="../image/banner 01.png"></center>
+      <center><img src="${path}/image/banner 01.png"></center>
     </div>
     <div class="item">
-      <center><img src="../image/banner 02.png"></center>
+      <center><img src="${path}/image/banner 02.png"></center>
     </div>
     <div class="item">
-      <center><img src="../image/banner 03.png"></center>
+      <center><img src="${path}/image/banner 03.png"></center>
     </div>
     <div class="item">
-      <center><img src="../image/banner 04.png"></center>
+      <center><img src="${path}/image/banner 04.png"></center>
     </div>
   </div>
   <!-- Controls -->
@@ -170,8 +168,8 @@ window.onload=function(){
     <div role="tabpanel" class="tab-pane active" id="home">        
         <div class="row">
         <div class="col-xs-6 col-md-4">
-          <a href="show.html" target="_blank" class="thumbnail">
-            <video src="../video/1、Lua语言介绍.mp4">
+          <a href="show.jsp" target="_blank" class="thumbnail">
+            <video src="${path}/video/1、Lua语言介绍.mp4">
     Your browser does not support the video tag.
       		</video>
             <div class="caption">
@@ -181,8 +179,8 @@ window.onload=function(){
           </a>
         </div> 
         <div class="col-xs-6 col-md-4">
-          <a href="show.html" target="_blank" class="thumbnail">
-            <video src="../video/暴力熊猫广告.mp4">
+          <a href="show.jsp" target="_blank" class="thumbnail">
+            <video src="${path}/video/暴力熊猫广告.mp4">
     Your browser does not support the video tag.
       		</video>
             <div class="caption">
@@ -198,7 +196,7 @@ window.onload=function(){
       <div class="row">
         <div class="col-xs-6 col-md-4">
           <a href="show.jsp" target="_blank" class="thumbnail">
-            <video src="../video/cocos2d-x游戏开发之cocosbuilder1.mp4">
+            <video src="${path}/video/cocos2d-x游戏开发之cocosbuilder1.mp4">
     Your browser does not support the video tag.
       		</video>
       		<div class="caption">
@@ -209,7 +207,7 @@ window.onload=function(){
         </div>
         <div class="col-xs-6 col-md-4">
           <a href="show.jsp" target="_blank" class="thumbnail">
-            <video src="../video/1、粒子界面及创建.mp4">
+            <video src="${path}/video/1、粒子界面及创建.mp4">
     Your browser does not support the video tag.
       		</video>
             <div class="caption">
@@ -220,7 +218,7 @@ window.onload=function(){
         </div>
         <div class="col-xs-6 col-md-4">
           <a href="show.jsp" target="_blank" class="thumbnail">
-            <video src="../video/NGUI基本介绍.mp4">
+            <video src="${path}/video/NGUI基本介绍.mp4">
     Your browser does not support the video tag.
       		</video>
             <div class="caption">
@@ -233,7 +231,7 @@ window.onload=function(){
       <div class="row">
       	<div class="col-xs-6 col-md-4">
           <a href="show.jsp" target="_blank" class="thumbnail">
-            <video src="../video/cocos2d-x游戏开发之cocosbuilder1.mp4">
+            <video src="${path}/video/cocos2d-x游戏开发之cocosbuilder1.mp4">
     Your browser does not support the video tag.
       		</video>
             <div class="caption">
@@ -244,7 +242,7 @@ window.onload=function(){
         </div>     
         <div class="col-xs-6 col-md-4">
           <a href="show.jsp" target="_blank" class="thumbnail">
-            <video src="../video/cocos2d-x游戏开发之cocosbuilder1.mp4">
+            <video src="${path}/video/cocos2d-x游戏开发之cocosbuilder1.mp4">
     Your browser does not support the video tag.
       		</video>
             <div class="caption">
