@@ -20,7 +20,7 @@
 				<img src="${path}/image/img-01.png"">
 			</div>
 
-			<form class="login100-form validate-form" action="${path}/indexPage">
+			<form class="login100-form validate-form" action="${path}/loginSuccess">
 				<span class="login100-form-title">
 					会员登陆
 				</span>

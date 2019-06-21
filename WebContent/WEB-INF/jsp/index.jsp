@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="defined" uri="http://www.lumlum.cn/lumlum" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-CN">
 <head>
@@ -157,104 +158,25 @@ window.onload=function(){
 
 <!-- 标签页部分 -->
 <div class="container">
-  <!-- Nav tabs -->
-  <ul class="nav nav-tabs row" role="tablist">
-    <li role="presentation" class="active col-md-4 h3 text-center"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">热门推荐</a></li>
-    <li role="presentation" class="col-md-4 h3 text-center"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">最新发布</a></li>
-  </ul>
-
-  <!-- Tab panes -->
-  <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="home">        
-        <div class="row">
-        <div class="col-xs-6 col-md-4">
-          <a href="show.jsp" target="_blank" class="thumbnail">
-            <video src="${path}/video/1、Lua语言介绍.mp4">
-    Your browser does not support the video tag.
-      		</video>
-            <div class="caption">
-              <h3>Lua语言介绍</h3>
-              <p>Lua 是一种轻量小巧的脚本语言，用标准C语言编写并以源代码形式开放。</p>
-            </div>
-          </a>
-        </div> 
-        <div class="col-xs-6 col-md-4">
-          <a href="show.jsp" target="_blank" class="thumbnail">
-            <video src="${path}/video/暴力熊猫广告.mp4">
-    Your browser does not support the video tag.
-      		</video>
-            <div class="caption">
-              <h3>暴力熊猫广告</h3>
-              <p>那只又贱又暴力的熊猫，铺主一直没搞懂这个暴力熊猫的来源，直到最近发现，这原来是一个熊猫奶酪的广告...</p>
-            </div>
-          </a>
-        </div>          
-      </div>
-    </div>
-    
-    <div role="tabpanel" class="tab-pane" id="profile">
-      <div class="row">
-        <div class="col-xs-6 col-md-4">
-          <a href="show.jsp" target="_blank" class="thumbnail">
-            <video src="${path}/video/cocos2d-x游戏开发之cocosbuilder1.mp4">
-    Your browser does not support the video tag.
-      		</video>
-      		<div class="caption">
-              <h3>cocos2d-x游戏开发之cocosbuilder</h3>
-              <p>CocosBuilder是一款原生的支持cocos2d和cocos2d-x的UI编辑器。</p>
-            </div>
-          </a>
-        </div>
-        <div class="col-xs-6 col-md-4">
-          <a href="show.jsp" target="_blank" class="thumbnail">
-            <video src="${path}/video/1、粒子界面及创建.mp4">
-    Your browser does not support the video tag.
-      		</video>
-            <div class="caption">
-              <h3>1、粒子界面及创建</h3>
-              <p>粒子是游戏设计及其重要的组成部分，在Unity3.5版本以后，新推出Shuriken粒子系统，采用模块化管理，个性化的粒子模块配合曲线编辑器使用户更容易创作出各种缤纷复杂的粒子效果。</p>
-            </div>
-          </a>
-        </div>
-        <div class="col-xs-6 col-md-4">
-          <a href="show.jsp" target="_blank" class="thumbnail">
-            <video src="${path}/video/NGUI基本介绍.mp4">
-    Your browser does not support the video tag.
-      		</video>
-            <div class="caption">
-              <h3>NGUI基本介绍</h3>
-              <p>NGUI是严格遵循KISS原则并用C#编写的Unity（适用于专业版和免费版）插件，提供强大的UI系统和事件通知框架。</p>
-            </div>
-          </a>
-        </div>                   
-      </div>
-      <div class="row">
-      	<div class="col-xs-6 col-md-4">
-          <a href="show.jsp" target="_blank" class="thumbnail">
-            <video src="${path}/video/cocos2d-x游戏开发之cocosbuilder1.mp4">
-    Your browser does not support the video tag.
-      		</video>
-            <div class="caption">
-              <h3>cocos2d-x游戏开发之cocosbuilder</h3>
-              <p>CocosBuilder是一款原生的支持cocos2d和cocos2d-x的UI编辑器。</p>
-            </div>
-          </a>
-        </div>     
-        <div class="col-xs-6 col-md-4">
-          <a href="show.jsp" target="_blank" class="thumbnail">
-            <video src="${path}/video/cocos2d-x游戏开发之cocosbuilder1.mp4">
-    Your browser does not support the video tag.
-      		</video>
-            <div class="caption">
-              <h3>cocos2d-x游戏开发之cocosbuilder</h3>
-              <p>CocosBuilder是一款原生的支持cocos2d和cocos2d-x的UI编辑器。</p>
-            </div>
-          </a>
-        </div>     
-      </div>
-    </div>
-     
-  </div>
+	<!-- Nav tabs -->
+	<ul class="nav nav-tabs row" role="tablist">
+    	<li role="presentation" class="active col-md-4 h3 text-center"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">热门推荐</a></li>
+    	<li role="presentation" class="col-md-4 h3 text-center"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">最新发布</a></li>
+  	</ul>
+  	<!-- Tab panes -->
+  	<div class="tab-content">
+    	<div role="tabpanel" class="tab-pane active" id="home">        
+        	<div class="row">
+        		<defined:fetchPopular />        
+      		</div>
+    	</div> 
+    	   
+    	<div role="tabpanel" class="tab-pane" id="profile">
+      		<div class="row">
+      	 		<defined:fetchPopular />          
+      		</div>
+    	</div>  
+  	</div>
 </div>
 
 </body>

@@ -23,24 +23,39 @@ public class UserController{
     	return new ModelAndView("register", "command", new User());
 	}   
 	@RequestMapping(value = "/addUser", method = RequestMethod.GET)
-	public String addStudent(@ModelAttribute("SpringWeb")User user,ModelMap model,HttpSession session) {
+	public String addUser(@ModelAttribute("SpringWeb")User user,ModelMap model,HttpSession session) {
 		user.setVIP(false);
 		Sqlsession.insert("mapper.UserMapper.addUser",user);
 	    Sqlsession.commit();
 		if(user.getUsername() != null){
 			session.setAttribute("username",user.getUsername());
 	    }
-	    return "redirect:indexPage";
+	    return "redirect:index";
 	}
-	@RequestMapping(value = "/indexPage", method = RequestMethod.GET)
-	public String indexPage(String username,String password,HttpSession session) {  
-		if(username != null){
-			session.setAttribute("username",username);
-	    }
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	public String indexPage(HttpServletRequest request,HttpSession session) {  	
+		//获取/video的磁盘路径
+		String rootAbsolutePath = request.getServletContext().getRealPath("/video");
+		//localhost:8080/video-website/
+		String rootRelativePath = request.getContextPath();
+		session.setAttribute("rootAbsolutePath", rootAbsolutePath);
+		session.setAttribute("rootRelativePath", rootRelativePath);
 		return "index";
 	}
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String loginPage() {  		
+	public String login() {  		
 		return "login";
 	}
+	@RequestMapping(value = "/loginSuccess", method = RequestMethod.GET)
+	public String loginSuccess(String username,String password,HttpSession session) {  
+		if(username != null){
+			session.setAttribute("username",username);
+	    }
+		return "redirect:index";
+	}
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public String display() {  		
+		return "display";
+	}
+	
 }
