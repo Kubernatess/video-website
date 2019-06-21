@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="defined" uri="http://www.lumlum.cn/lumlum" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>show</title>
+<title>display</title>
 <style>
 img{
 	width:192px;
@@ -16,7 +18,17 @@ img{
     height:108px;	
 }
 </style>
-<link href="../css/navigation.css" rel="stylesheet" type="text/css">
+<script>
+window.onload=function(){
+	var myVideo=document.getElementsByTagName("video");	
+	for(var i=0;i<myVideo.length;i++){
+		myVideo[i].currentTime=25;
+	}
+	
+}
+</script>
+<c:set var="path" value="${pageContext.request.contextPath}" scope="page"/>
+<link href="${path}/css/navigation.css" rel="stylesheet" type="text/css">
 <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
@@ -89,25 +101,15 @@ img{
 
 <div class="row">
 	<div class="col-md-8">
-		<video src="../video/1、Lua语言介绍.mp4" width=960 height=540 controls>
+		<video src="${path}/video/${requestScope.videoName}" width=960 height=540 controls>
     		Your browser does not support the video tag.
       	</video>
     </div>
     <div class="col-md-4">
     	<h1>相关视频</h1>
       	<ul class="list-group">
-      
-        	<li class="list-group-item row">
-          		<div class="col-md-6">
-        			<video src="../video/cocos2d-x游戏开发之cocosbuilder1.mp4">
-    					Your browser does not support the video tag.
-      				</video>
-          		</div>
-          		<div class="col-md-6">
-          			<p>cocos2d-x游戏开发之cocosbuilder1[高清版]</p>
-            		<p>视频时长: 20:00</p>
-          		</div>
-        	</li>        
+      		<defined:fetchRelevant />
+        	      
         
 		</ul>
 	</div>

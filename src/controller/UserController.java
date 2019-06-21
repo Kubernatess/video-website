@@ -33,13 +33,7 @@ public class UserController{
 	    return "redirect:index";
 	}
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
-	public String indexPage(HttpServletRequest request,HttpSession session) {  	
-		//获取/video的磁盘路径
-		String rootAbsolutePath = request.getServletContext().getRealPath("/video");
-		//localhost:8080/video-website/
-		String rootRelativePath = request.getContextPath();
-		session.setAttribute("rootAbsolutePath", rootAbsolutePath);
-		session.setAttribute("rootRelativePath", rootRelativePath);
+	public String indexPage() {  	
 		return "index";
 	}
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -54,7 +48,9 @@ public class UserController{
 		return "redirect:index";
 	}
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public String display() {  		
+	public String display(HttpServletRequest request) {  		
+		String videoName = request.getParameter("videoName");
+		request.setAttribute("videoName", videoName);
 		return "display";
 	}
 	

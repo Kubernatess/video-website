@@ -19,22 +19,23 @@ public class fetchPopular extends SimpleTagSupport{
 		rootAbsolutePath=(String) pc.getSession().getAttribute("rootAbsolutePath");
 		rootRelativePath=(String) pc.getSession().getAttribute("rootRelativePath");
 		File root=new File(rootAbsolutePath);
-		fun(root);
+		fetch(root);
 	}
-	public void fun(File root) throws IOException{
+	public void fetch(File root) throws IOException{
 		if(root.isDirectory()){
 			//获取file文件夹下的所有子节点
 			File files[]=root.listFiles();
 			//遍历所有
 			for(File f:files){
-				fun(f);
+				fetch(f);
 			}	    
 		}
 		else{
 			//输出文件或文件夹
 			pc.getOut().print("<div class=\'col-xs-6 col-md-4\'>");
-			pc.getOut().print("<a href=\'"+rootRelativePath+"/display\' target=\'_blank\' class=\'thumbnail\'>");
-			pc.getOut().print("<video src=\'"+rootRelativePath+"/video"+root.getName()+"\'>");
+			//传递参数videoName到display页面,使display页面显示特定内容
+			pc.getOut().print("<a href=\'"+rootRelativePath+"/display?videoName="+root.getName()+"\' target=\'_blank\' class=\'thumbnail\'>");
+			pc.getOut().print("<video src=\'"+rootRelativePath+"/video/"+root.getName()+"\'>");
 			pc.getOut().print("Your browser does not support the video tag.");
 			pc.getOut().print("</video>");
 			pc.getOut().print("<div class=\'caption\'>");
