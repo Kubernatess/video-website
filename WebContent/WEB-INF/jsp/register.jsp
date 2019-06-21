@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>register</title>
-<link href="${pageContext.request.contextPath}/css/register.css" rel="stylesheet" type="text/css">
+<c:set var="path" value="${pageContext.request.contextPath}" scope="page"/>
+<link href="${path}/css/register.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<form action="/video-website/addUser" method="GET" validate>
+<form action="${path}/addUser" method="GET" validate>
   <fieldset>
     <legend>Register</legend>
     <p>用户名*</p><input type="text" name="username"/>    

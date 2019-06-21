@@ -1,30 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>login</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="../css/util.css">
-<link rel="stylesheet" type="text/css" href="../css/main.css">
+<c:set var="path" value="${pageContext.request.contextPath}" scope="page"/>
+<link rel="stylesheet" type="text/css" href="${path}/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="${path}/css/util.css">
+<link rel="stylesheet" type="text/css" href="${path}/css/main.css">
 </head>
 <body>
 <div class="dowebok">
 	<div class="container-login100">
 		<div class="wrap-login100">
 			<div class="login100-pic js-tilt" data-tilt>
-				<img src="../image/img-01.png"">
+				<img src="${path}/image/img-01.png"">
 			</div>
 
-			<form class="login100-form validate-form">
+			<form class="login100-form validate-form" action="${path}/indexPage">
 				<span class="login100-form-title">
 					会员登陆
 				</span>
 
 				<div class="wrap-input100 validate-input">
-					<input class="input100" type="text" placeholder="用户名">
+					<input class="input100" type="text" name="username" placeholder="用户名">
 					<span class="focus-input100"></span>
 					<span class="symbol-input100">
 						<i class="fa fa-user-circle" aria-hidden="true"></i>
@@ -32,7 +34,7 @@
 				</div>
 
 				<div class="wrap-input100 validate-input">
-					<input class="input100" type="password" placeholder="密码">
+					<input class="input100" type="password" name="password" placeholder="密码">
 					<span class="focus-input100"></span>
 					<span class="symbol-input100">
 						<i class="fa fa-lock" aria-hidden="true"></i>
@@ -40,7 +42,7 @@
 				</div>
 				
 				<div class="container-login100-form-btn">
-					<input type="button" value="登陆" class="login100-form-btn">
+					<input type="submit" value="登陆" class="login100-form-btn">
 				</div>
 
 				<div class="text-center p-t-12">
