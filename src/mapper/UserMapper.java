@@ -1,5 +1,7 @@
 package mapper;
 
-public class UserMapper {
+import bean.User;
 
+public interface UserMapper {
+	public void addUser(User user);
 }

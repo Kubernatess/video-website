@@ -3,8 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="mapper.UserMapper">
-<insert id="addUser" parameterType="bean.User">
-    insert into user(username,password,VIP) values(#{username},#{password},#{VIP});
-</insert>
+<mapper namespace="mapper.VideoMapper">
+<select id="getAllVideoInfo" resultType="Video">
+	select * from video;
+</select>
 </mapper>

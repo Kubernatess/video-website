@@ -1,4 +1,6 @@
 package controller;
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -12,21 +14,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import bean.User;
+import mapper.UserMapper;
 import utils.MyBatisUtils;
 
 import org.springframework.ui.ModelMap;
 @Controller
 public class UserController{ 
-	private SqlSession Sqlsession = MyBatisUtils.getSession();
+	private SqlSession openSession;
     @RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView user() {
     	return new ModelAndView("register", "command", new User());
 	}   
 	@RequestMapping(value = "/addUser", method = RequestMethod.GET)
-	public String addUser(@ModelAttribute("SpringWeb")User user,ModelMap model,HttpSession session) {
+	public String addUser(@ModelAttribute("SpringWeb")User user,ModelMap model,HttpSession session) throws IOException {
+		openSession = MyBatisUtils.getSqlSessionFactory();
+		System.out.println("UserController:"+openSession);
+		UserMapper mapper=openSession.getMapper(UserMapper.class);
 		user.setVIP(false);
-		Sqlsession.insert("mapper.UserMapper.addUser",user);
-	    Sqlsession.commit();
+		mapper.addUser(user);
+	    openSession.commit();
 		if(user.getUsername() != null){
 			session.setAttribute("username",user.getUsername());
 	    }

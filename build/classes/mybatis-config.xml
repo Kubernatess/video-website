@@ -5,10 +5,18 @@
 <configuration>
     <!-- 引入数据库连接配置文件 -->
     <properties resource="db.properties" />
+	<!-- 开启驼峰命名 -->
+	<settings>		
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+	<!-- 批量起别名 -->
+	<typeAliases>	
+		<package name="bean"/>
+	</typeAliases>
     <!--配置环境 ，默认的环境id为mysql -->
-    <environments default="mysql">
+    <environments default="development">
         <!-- 配置id为mysql的数据库环境 -->
-        <environment id="mysql">
+        <environment id="development">
             <!-- 使用JDBC的事务管理 -->
             <transactionManager type="JDBC" />
             <!--数据库连接池 -->
@@ -22,6 +30,7 @@
     </environments>
     <!--配置Mapper的位置, mappers告诉了MyBatis去哪里找持久化类的映射文件 -->
     <mappers>
-        <mapper resource="mapper/UserMapper.xml"></mapper>
+        <!-- 批量注册 -->
+		<package name="mapper"/>
     </mappers>
 </configuration>

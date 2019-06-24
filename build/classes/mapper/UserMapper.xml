@@ -5,6 +5,6 @@
 
 <mapper namespace="mapper.UserMapper">
 <insert id="addUser" parameterType="bean.User">
-    insert into user(username,password,VIP) values (#{username},#{password},#{VIP});
+    insert into user(username,password,VIP) values(#{username},#{password},#{VIP});
 </insert>
 </mapper>

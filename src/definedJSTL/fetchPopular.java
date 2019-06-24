@@ -2,20 +2,30 @@ package definedJSTL;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
+import org.apache.ibatis.session.SqlSession;
+
+import bean.Video;
+import mapper.UserMapper;
+import mapper.VideoMapper;
+import utils.MyBatisUtils;
+
 public class fetchPopular extends SimpleTagSupport{
 	private PageContext pc;
 	private String rootAbsolutePath;
 	private String rootRelativePath;
+	private SqlSession openSession;
 	public void setJspContext(JspContext pc) {
 		this.pc=(PageContext) pc;
 	}
 	public void doTag() throws JspException, IOException {
+		openSession = MyBatisUtils.getSqlSessionFactory();
 		rootAbsolutePath=(String) pc.getSession().getAttribute("rootAbsolutePath");
 		rootRelativePath=(String) pc.getSession().getAttribute("rootRelativePath");
 		File root=new File(rootAbsolutePath);
@@ -31,7 +41,11 @@ public class fetchPopular extends SimpleTagSupport{
 			}	    
 		}
 		else{
-			//输出文件或文件夹
+			openSession = MyBatisUtils.getSqlSessionFactory();
+			System.out.println("fetchpopular:"+openSession);
+			VideoMapper mapper=openSession.getMapper(VideoMapper.class);
+			List<Video> videos = mapper.getAllVideoInfo();
+			System.out.println(videos);
 			pc.getOut().print("<div class=\'col-xs-6 col-md-4\'>");
 			//传递参数videoName到display页面,使display页面显示特定内容
 			pc.getOut().print("<a href=\'"+rootRelativePath+"/display?videoName="+root.getName()+"\' target=\'_blank\' class=\'thumbnail\'>");

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50720
 File Encoding         : 65001
 
-Date: 2019-06-17 11:55:09
+Date: 2019-06-24 20:37:04
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,8 +28,8 @@ CREATE TABLE `review` (
   PRIMARY KEY (`username`,`review_date`),
   KEY `author` (`author`),
   KEY `upload_date` (`upload_date`),
-  CONSTRAINT `review_ibfk_1` FOREIGN KEY (`author`) REFERENCES `upload_list` (`author`),
-  CONSTRAINT `review_ibfk_2` FOREIGN KEY (`upload_date`) REFERENCES `upload_list` (`upload_date`),
+  CONSTRAINT `review_ibfk_1` FOREIGN KEY (`author`) REFERENCES `video` (`author`),
+  CONSTRAINT `review_ibfk_2` FOREIGN KEY (`upload_date`) REFERENCES `video` (`upload_date`),
   CONSTRAINT `review_ibfk_3` FOREIGN KEY (`username`) REFERENCES `user` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
