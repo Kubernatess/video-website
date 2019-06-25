@@ -1,9 +1,18 @@
 package controller;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URLEncoder;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,16 +29,4 @@ public class VideoController {
 		request.setAttribute("videoName", videoName);
 		return "display";
 	}
-	@RequestMapping(path = "/upload")
-	public String handleFormUpload(@RequestParam("video_name") String video_name,@RequestParam("describe") String describe, @RequestParam("upload") MultipartFile uploadfile) throws IOException {
-		System.out.println(video_name);
-        if (!uploadfile.isEmpty()) {
-            byte[] bytes = uploadfile.getBytes();
-            // store the bytes somewhere
-            System.out.println(bytes);
-            return "redirect:uploadSuccess";
-        }
-
-        return "redirect:uploadFailure";
-    }
 }
