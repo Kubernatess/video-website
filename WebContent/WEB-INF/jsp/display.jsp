@@ -72,7 +72,7 @@ window.onload=function(){
       			<li><a href="${path}/register" target='_blank'>注册</a></li>
       		</c:when>
       		<c:otherwise>
-      			<li><a href="#">上传视频</a></li>
+      			<li><a href="#" data-toggle="modal" data-target="#myModal">上传视频</a></li>
 	        <li class="dropdown">
 	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">YouTube<span class="caret"></span></a>
 	          <ul class="dropdown-menu">
@@ -85,14 +85,48 @@ window.onload=function(){
 	          </ul>
 	        </li>
       		</c:otherwise>
-      	</c:choose>
-      </ul>
+		</c:choose>
+		</ul>
       
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 
-
+<!-- Modal 引用上面的<a>上传视频</a> -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">分享视频</h4>
+      </div>
+      <form>
+      	<div class="modal-body">     	
+          	<div class="form-group">
+                    <label for="video_name">视频名称</label>
+                    <input type="text" class="form-control" id="video_name">
+                </div>
+                <div class="form-group">
+                    <label for="destroy">描述</label>
+                    <textarea class="form-control" rows="4" id="destroy"></textarea>
+                </div>         
+                <div class="form-group">
+                    <label for="upload">上传视频</label>
+                    <input type="file" id="upload">
+                </div>
+                <div class="form-group">
+                    <label for="cover">上传封面</label>
+                    <input type="file" id="cover">
+                </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">分享</button>
+            <button type="button" class="btn btn-default">返回</button>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 
 

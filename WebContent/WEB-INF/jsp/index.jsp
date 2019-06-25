@@ -18,9 +18,13 @@ window.onload=function(){
 	var myVideo=document.getElementsByTagName("video");	
 	for(var i=0;i<myVideo.length;i++){
 		myVideo[i].currentTime=25;
-	}
+	}	
 	
+	$('#myModal').on('hide.bs.modal', function (){
+		document.myForm.submit();
+	})
 }
+
 </script>
 <c:set var="path" value="${pageContext.request.contextPath}" scope="page"/>
 <link href="${path}/css/navigation.css" rel="stylesheet" type="text/css">
@@ -69,7 +73,7 @@ window.onload=function(){
 	       				<li><a href="${path}/register" target='_blank'>注册</a></li>
 	    			</c:when>
 					<c:otherwise>
-	    				<li><a href="#">上传视频</a></li>
+	    				<li><a href="#" data-toggle="modal" data-target="#myModal">上传视频</a></li>
 	        			<li class="dropdown">
 	          				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${sessionScope.username}<span class="caret"></span></a>
 	          				<ul class="dropdown-menu">
@@ -97,29 +101,30 @@ window.onload=function(){
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">分享视频</h4>
       </div>
-      <form>
+      <form method="post" name="myForm" action="${path}/upload" enctype="multipart/form-data">
       	<div class="modal-body">     	
           	<div class="form-group">
-                    <label for="video_name">视频名称</label>
-                    <input type="text" class="form-control" id="video_name">
-                </div>
-                <div class="form-group">
-                    <label for="destroy">描述</label>
-                    <textarea class="form-control" rows="4" id="destroy"></textarea>
-                </div>         
-                <div class="form-group">
-                    <label for="upload">上传视频</label>
-                    <input type="file" id="upload">
-                </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">分享</button>
-            <button type="button" class="btn btn-default">返回</button>
-          </div>
+            	<label for="video_name">视频名称</label>
+                <input type="text" class="form-control" id="video_name" name="video_name">
+            </div>
+            <div class="form-group">
+                <label for="describe">描述</label>
+                <textarea class="form-control" rows="4" id="describe" name="describe"></textarea>
+            </div>         
+            <div class="form-group">
+                <label for="upload">上传视频</label>
+                <input type="file" id="upload" name="upload">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">分享</button>
+          <button type="button" class="btn btn-default">返回</button>
+        </div>
       </form>
     </div>
   </div>
 </div>
+
 
 <!-- 轮播图部分  -->
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
