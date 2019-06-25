@@ -66,10 +66,13 @@ window.onload=function(){
       </form>
       
       <ul class="nav navbar-nav navbar-right">
-      <%
-      	if(session.getAttribute("username")!=null){
-      %>
-			<li><a href="#">上传视频</a></li>
+      	<c:choose>
+      		<c:when test="${empty sessionScope.username}">
+      			<li><a href="${path}/login" target='_blank'>登陆</a></li>
+      			<li><a href="${path}/register" target='_blank'>注册</a></li>
+      		</c:when>
+      		<c:otherwise>
+      			<li><a href="#">上传视频</a></li>
 	        <li class="dropdown">
 	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">YouTube<span class="caret"></span></a>
 	          <ul class="dropdown-menu">
@@ -81,14 +84,8 @@ window.onload=function(){
 	            <li><a href="#">退出</a></li>
 	          </ul>
 	        </li>
-	      
-      <% 		
-      	}
-      	else{
-      		out.print("<li><a href='#'>登陆</a></li>");
-      		out.print("<li><a href='#'>注册</a></li>");
-      	}
-      %>
+      		</c:otherwise>
+      	</c:choose>
       </ul>
       
     </div><!-- /.navbar-collapse -->
@@ -101,20 +98,17 @@ window.onload=function(){
 
 <div class="row">
 	<div class="col-md-8">
-		<video src="${path}/video/${requestScope.videoName}" width=960 height=540 controls>
+		<video src="${path}/video/${requestScope.author}/${requestScope.videoName}.mp4" width=960 height=540 controls>
     		Your browser does not support the video tag.
       	</video>
     </div>
     <div class="col-md-4">
     	<h1>相关视频</h1>
       	<ul class="list-group">
-      		<defined:fetchRelevant />
-        	      
-        
+      		<defined:fetchRelevant />       
 		</ul>
 	</div>
-    
-    
+      
   </div>
 </body>
 </html>

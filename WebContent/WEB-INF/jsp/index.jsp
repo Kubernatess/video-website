@@ -65,8 +65,8 @@ window.onload=function(){
 			<ul class="nav navbar-nav navbar-right">  
 				<c:choose>
 					<c:when test="${empty sessionScope.username}">
-	    				<li><a href='login.jsp' target='_blank'>登陆</a></li>
-	       				<li><a href='register.jsp' target='_blank'>注册</a></li>
+	    				<li><a href="${path}/login" target='_blank'>登陆</a></li>
+	       				<li><a href="${path}/register" target='_blank'>注册</a></li>
 	    			</c:when>
 					<c:otherwise>
 	    				<li><a href="#">上传视频</a></li>

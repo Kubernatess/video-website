@@ -10,6 +10,7 @@ public class Video {
 	private String description;
 	private String praiseNumber;
 	private byte[] size;
+	private String duration;
 	public String getAuthor() {
 		return author;
 	}
@@ -45,6 +46,12 @@ public class Video {
 	}
 	public void setSize(byte[] size) {
 		this.size = size;
+	}
+	public String getDuration() {
+		return duration;
+	}
+	public void setDuration(String duration) {
+		this.duration = duration;
 	}
 	
 }

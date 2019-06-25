@@ -28,7 +28,6 @@ public class UserController{
 	@RequestMapping(value = "/addUser", method = RequestMethod.GET)
 	public String addUser(@ModelAttribute("SpringWeb")User user,ModelMap model,HttpSession session) throws IOException {
 		openSession = MyBatisUtils.getSqlSessionFactory();
-		System.out.println("UserController:"+openSession);
 		UserMapper mapper=openSession.getMapper(UserMapper.class);
 		user.setVIP(false);
 		mapper.addUser(user);
@@ -53,11 +52,6 @@ public class UserController{
 	    }
 		return "redirect:index";
 	}
-	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public String display(HttpServletRequest request) {  		
-		String videoName = request.getParameter("videoName");
-		request.setAttribute("videoName", videoName);
-		return "display";
-	}
+	
 	
 }
